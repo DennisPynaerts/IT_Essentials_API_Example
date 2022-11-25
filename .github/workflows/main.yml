@@ -6,7 +6,7 @@ on:
 
 jobs:
   test_pull_request:
-    runs-on: ${{matrix-os}}
+    runs-on: ${{matrix.os}}
 
     strategy:
       matrix:
