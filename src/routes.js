@@ -84,10 +84,59 @@ router.delete('/campus/delete/:id', async(req, res) => {
 
 // alle docenten ophalen met hun campussen, gesorteerd op voornaam
 router.get('/docent', async(req, res) => {
-    console.log('Docent route called');
+    console.log('/docent route called');
     try {
         res.json(await Docent.find().populate('campussen').sort('voornaam'));
         console.log('Retrieved all teachers');
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+// docent aanmaken
+router.post('/docent/create', async(req, res) => {
+    console.log('/docent/create route called');
+    try {
+        res.send(await Docent.create(req.body));
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+// router.post('/docent/create', async(req, res) => {
+//     console.log('/docent/create route called');
+//     try {
+//         const docent = new Docent({
+//             voornaam: req.body.voornaam,
+//             achternaam: req.body.achternaam,
+//             campussen: req.body.campussen
+//         });
+//         await docent.save();
+//         res.send(docent);
+//     } catch (e) {
+//         console.log(e);
+//         res.sendStatus(500);
+//     }
+// });
+
+// docent updaten
+router.put('/docent/update/:id', async(req, res) => {
+    console.log('/docent/update route called');
+    try {
+        res.send(await Docent.findByIdAndUpdate(req.params.id, { $set: req.body }));
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+// docent verwijderen
+router.delete('/docent/delete/:id', async(req, res) => {
+    console.log('/docent/delete/:id route called');
+    try {
+        res.send(await Docent.findByIdAndDelete(req.params.id));
     } catch (e) {
         console.log(e);
         res.sendStatus(500);
