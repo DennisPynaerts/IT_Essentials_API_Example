@@ -82,4 +82,16 @@ router.delete('/campus/delete/:id', async(req, res) => {
     }
 });
 
+// alle docenten ophalen met hun campussen, gesorteerd op voornaam
+router.get('/docent', async(req, res) => {
+    console.log('Docent route called');
+    try {
+        res.json(await Docent.find().populate('campussen').sort('voornaam'));
+        console.log('Retrieved all teachers');
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
 module.exports = router;

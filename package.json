@@ -6,7 +6,8 @@
     "scripts": {
         "start": "netlify-lambda serve src",
         "build": "netlify-lambda build src",
-        "test": "mocha --timeout 10000"
+        "test": "mocha --timeout 10000",
+        "local": "npx nodemon src/api.js"
 
     },
     "author": "",
